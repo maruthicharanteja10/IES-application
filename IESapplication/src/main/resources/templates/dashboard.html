@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IES Dashboard</title>
+
+<!--font awesome-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+<!--css file-->
+<link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+</head>
+<body>
+	<div class="sidebar close">
+		<div class="logo">
+			<i class="fa-duotone fa-solid fa-fire-alt fa-swap-opacity"></i> <span
+				class="logo-name">I E S</span>
+		</div>
+
+		<ul class="nav-list">
+			<li><a href="#"> <i class="fa-solid fa-universal-access"></i></i> <span
+					class="link-name">Dashboard</span>
+			</a>
+
+				<ul class="sub-menu blank">
+					<li><a href="#" class="link-name">Dashboard</a></li>
+				</ul></li>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa-solid fa-address-card"></i> <span
+						class="link-name">Application Registration</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name">Application Registration</a></li>
+					<li><a href="#">Block Chain</a></li>
+					<li><a href="#">Cryptography</a></li>
+					<li><a href="#">Animation</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa-solid fa-database"></i> <span
+						class="link-name">Data Collection</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name">Data Collection</a></li>
+					<li><a href="#">Web Design</a></li>
+					<li><a href="#">Card Design</a></li>
+					<li><a href="#">Form Design</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa-solid fa-user-check"></i> <span
+						class="link-name">Eligibility Determination</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name">Eligibility
+							Determination</a></li>
+					<li><a href="#">Web Design</a></li>
+					<li><a href="#">Card Design</a></li>
+					<li><a href="#">Form Design</a></li>
+				</ul>
+			</li>
+
+
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa-solid fa-envelope-open-text"></i> <span
+						class="link-name">Correspondence</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name">Correspondence</a></li>
+					<li><a href="#">Python Compiler</a></li>
+					<li><a href="#">Java Compiler</a></li>
+					<li><a href="#">C Compiler</a></li>
+				</ul>
+			</li>
+			<li><a href="#"> <i class="fa-solid fa-money-bill-1-wave"></i> <span
+					class="link-name">Benefit Insurance</span>
+			</a>
+
+				<ul class="sub-menu blank">
+					<li><a href="#" class="link-name">Benefit Insurance</a></li>
+				</ul></li>
+			<li><a href="#"> <i class="fa-solid fa-print"></i><span
+					class="link-name">Reports</span>
+			</a>
+
+				<ul class="sub-menu blank">
+					<li><a href="#" class="link-name">Reports</a></li>
+				</ul></li>
+
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa-solid fa-user-secret"></i> <span
+						class="link-name">Admin</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name">Admin</a></li>
+					<li><a href="#">Create Account</a></li>
+					<li><a href="#">view Accounts</a></li>
+					<li><a href="#">Create Plan</a></li>
+					<li><a href="#">view Plans</a></li>
+					<li><a href="#">Admin</a></li>
+				</ul>
+				
+			</li>
+
+			<li>
+				<div class="profile-details">
+					<div class="profile-content">
+						<img src="/img/profile.jpg" alt="" />
+					</div>
+
+					<div class="profile">
+						<div class="logout"><a href="/IES/">Logout <i class="fas fa-right-to-bracket"></i></a></div>
+
+					</div>	
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="home-section">
+		<div class="home-content">
+			<i class="fas fa-bars"></i> <span class="text">IES Dashboard</span>
+		</div>
+		<br> <br>
+		<div class="dashboard">
+        <div class="card blue">
+            <h3>No. of Plans Available</h3>
+            <h1>23</h1>
+            <p>Jan 2022 - May 2023</p>
+            <i class="fas fa-file-alt"></i>
+        </div>
+        
+        <div class="card pink">
+            <h3>Citizens Approved</h3>
+            <h1>8577641</h1>
+            <p>Jan 2022 - May 2023</p>
+            <i class="fas fa-money-bill-wave"></i>
+        </div>
+
+        <div class="card orange">
+            <h3>Citizens Denied</h3>
+            <h1>4565</h1>
+            <p>Jan 2022 - May 2023</p>
+            <i class="fas fa-users"></i>
+        </div>
+
+        <div class="card purple">
+            <h3>Benefits Given</h3>
+            <h1>12566 $</h1>
+            <p>Jan 2022 - May 2023</p>
+            <i class="fas fa-heart"></i>
+        </div>
+       
+    </div>
+     <br><br> <br> <br> <br>  <br> <br> <br> <br> <br> <br> 
+	</div>
+
+	<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>
