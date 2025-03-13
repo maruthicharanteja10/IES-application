@@ -24,5 +24,9 @@ public class IndexController {
 	public String dashboardpage() {
 		return "dashboard";
 	}
+	@GetMapping("/profile")
+	public String profilepage() {
+		return "profile";
+	}
 
 }
