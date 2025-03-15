@@ -16,9 +16,9 @@ public class IndexController {
 	public String loginpage() {
 		return "login";
 	}
-	@GetMapping("/register")
+	@GetMapping("/newpassword")
 	public String registerpage() {
-		return "register";
+		return "newpassword";
 	}
 	@GetMapping("/dashboard")
 	public String dashboardpage() {
