@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/login_signup.css}">
+
+<title>REGISTER</title>
+</head>
+<body>
+
+	<main>
+
+		<section class="form">
+
+			<h1 class="form__title">Hello Welcome</h1>
+			<h5>
+				Your Email :
+				<p th:text="${email}" /></p>
+			</h5>
+			
+
+			<p th:text="${successMsg}" class="text-success">
+			<p th:text="${errMsg}" class="text-danger">
+			<form th:action="@{/IES/admin/unlock}" th:object="${unlock}" method="post">
+			<input type="hidden" name="email" th:value="${email}" />
+				<label class="form-control__label"> TempPassword</label> <input
+					type="text" class="form-control" th:field="*{tempPswd}"> <label
+					class="form-control__label">NewPassword</label>
+				<div class="password-field">
+					<input type="password" class="form-control" id="password"
+						th:field="*{newPswd}">
+				</div>
+				<label class="form-control__label">ConfirmNewPassword</label>
+				<div class="password-field">
+					<input type="password" class="form-control" id="password"
+						th:field="*{confirmPswd}">
+
+				</div>
+
+
+				<button class="form__submit" id="submit">Submit</button>
+			</form>
+
+			<p class="form__footer">
+				Already have an account?<br> <a th:href="@{/IES/login}">
+					Login here</a>
+			</p>
+
+
+		</section>
+
+		<section class="form__animation">
+			<div id="ball">
+				<div class="ball">
+					<div id="face">
+						<div class="ball__eyes">
+							<div class="eye_wrap">
+								<span class="eye"></span>
+							</div>
+							<div class="eye_wrap">
+								<span class="eye"></span>
+							</div>
+						</div>
+						<div class="ball__mouth"></div>
+					</div>
+				</div>
+			</div>
+			<div class="ball__shadow"></div>
+		</section>
+	</main>
+	<script th:src="@{/js/login_signup.js}"></script>
+</body>
+</html>
