@@ -16,7 +16,5 @@ public class Plan {
 	private LocalDate planStartDate;
 	private LocalDate planEndDate;
 	private String activeStatus;
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private UserDetails user;
+	
 }

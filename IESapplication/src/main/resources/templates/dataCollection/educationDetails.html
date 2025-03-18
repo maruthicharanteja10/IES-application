@@ -11,6 +11,43 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">Education Details</h2>
+			<div class="container mt-5">
+
+
+				<form  action="@{/submitEducation}"
+					object="${educationDetails}" method="post">
+					<div class="mb-3">
+						<label for="caseNumber" class="form-label">Case Number</label> <input
+							type="text" class="form-control" id="caseNumber"
+							field="*{caseNumber}" readonly>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="highestDegree" class="form-label">Highest
+								Degree</label> <input type="text" class="form-control"
+								id="highestDegree" field="*{highestDegree}" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="graduationYear" class="form-label">Graduation
+								Year</label> <select class="form-select" id="graduationYear"
+								field="*{graduationYear}" required>
+								<option th:each="year : ${#numbers.sequence(1980, 2030)}"
+									value="${year}" th:text="${year}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="universityName" class="form-label">University
+							Name</label> <input type="text" class="form-control" id="universityName"
+							field="*{universityName}" required>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
 		</div>
 	</section>
 </body>

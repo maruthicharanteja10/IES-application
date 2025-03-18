@@ -5,26 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" th:href="@{/css/login_signup.css}">
 
-<title>REGISTER</title>
+<title>UNLOCK ACCOUNT</title>
 </head>
 <body>
-
 	<main>
-
 		<section class="form">
-
-			<h1 class="form__title">Hello Welcome</h1>
-			<h5>
-				Your Email :
-				<p th:text="${email}" /></p>
+			<h1 class="form__title">Unlock Your Account</h1>
+			<h5 class="form_head">
+				Your Email : <span th:text="${email}"></span>
 			</h5>
-			
 
-			<p th:text="${successMsg}" class="text-success">
-			<p th:text="${errMsg}" class="text-danger">
-			<form th:action="@{/IES/admin/unlock}" th:object="${unlock}" method="post">
-			<input type="hidden" name="email" th:value="${email}" />
-				<label class="form-control__label"> TempPassword</label> <input
+			<p th:text="${Msg}" class="text-success">
+			<form th:action="@{/IES/admin/unlock}" th:object="${unlock}"
+				method="post">
+				<input type="hidden" name="email" th:value="${email}" /> <label
+					class="form-control__label"> TempPassword</label> <input
 					type="text" class="form-control" th:field="*{tempPswd}"> <label
 					class="form-control__label">NewPassword</label>
 				<div class="password-field">
@@ -43,7 +38,7 @@
 			</form>
 
 			<p class="form__footer">
-				Already have an account?<br> <a th:href="@{/IES/login}">
+				Already have account Unlocked? <a th:href="@{/IES/admin/login}">
 					Login here</a>
 			</p>
 

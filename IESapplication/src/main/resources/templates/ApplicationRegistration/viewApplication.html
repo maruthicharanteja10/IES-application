@@ -11,6 +11,34 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">ViewApplication</h2>
+			<div class="container mt-5">
+
+
+				<table id="applicationsTable"
+					class="table table-striped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th>S.No</th>
+							<th>Case Num</th>
+							<th>Name</th>
+							<th>Mobile Number</th>
+							<th>Gender</th>
+							<th>SSN</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="app, stat : ${applications}">
+							<td th:text="${stat.index + 1}"></td>
+							<td th:text="${app.caseNum}"></td>
+							<td th:text="${app.name}"></td>
+							<td th:text="${app.mobileNumber}"></td>
+							<td th:text="${app.gender}"></td>
+							<td th:text="${app.ssn}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		</div>
 	</section>
 </body>

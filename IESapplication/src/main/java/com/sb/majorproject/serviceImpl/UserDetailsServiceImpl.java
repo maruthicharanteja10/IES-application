@@ -1,12 +1,17 @@
 package com.sb.majorproject.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import com.sb.majorproject.binding.RegisterDetails;
 import com.sb.majorproject.binding.UnlockForm;
+import com.sb.majorproject.entity.Plan;
 import com.sb.majorproject.entity.UserDetails;
+import com.sb.majorproject.repository.PlanRepository;
 import com.sb.majorproject.repository.UserDetailsRepository;
 import com.sb.majorproject.service.UserDetailsService;
 import com.sb.majorproject.utils.EmailUtils;
@@ -16,6 +21,7 @@ import com.sb.majorproject.utils.PasswordUtils;
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDetailsRepository userDetailRepo;
+		
 	@Autowired
 	private EmailUtils emailUtils;
 
@@ -83,5 +89,33 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		emailUtils.sendEmail(email, subject, body);
 		return true;
 	}
+
+	@Override
+	public String loginAccount(String email, String password) {
+		UserDetails entity = userDetailRepo.findByEmailAndPassword(email, password);
+
+		if (entity == null) {
+			return "invalid";
+		}
+		if (entity.getAcctStatus().equals("LOCKED")) {
+			return "locked";
+		}
+
+//		// create session and store user data in session
+//		Session.setAttribute("userId", (Long)entity.getUserId());
+		return "success";
+	}
+
+	@Override
+	public List<UserDetails> getAllDetails() {
+		
+		return userDetailRepo.findAll();
+	}
+
+	
+
+
+	
+
 
 }

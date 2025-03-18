@@ -49,9 +49,11 @@ section {
   color: #030712;
   font-weight: 600;
   font-size: 30px;
-  margin: 0 0 8px;
+  margin: 0 0 5px;
 }
-
+.form_head{
+	margin:0 0;
+}
 .form__description {
   color: #374151;
   text-align: center;
@@ -88,7 +90,7 @@ form {
 
 .form-control__label {
   display: block;
-  margin: 14px 0 4px;
+  margin: 0px 0 0px;
   color: #0d0c22;
   font-weight: 500;
 }
@@ -104,7 +106,7 @@ form {
   outline: none;
   background-color: #fff;
   color: #0d0c22;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   font-size: 16px;
 }
 
@@ -216,7 +218,7 @@ a {
 .form__footer {
   font-size: 14px;
   text-align: center;
-  margin: 32px 0 0;
+  margin: 3px 0 0;
 }
 
 .ball {

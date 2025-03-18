@@ -11,7 +11,21 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">Eligibility Determination</h2>
+			<div class="container mt-4">
+
+				<form th:action="@{/determine-eligibility}" method="post">
+					<div class="mb-3">
+						<label for="caseNumber" class="form-label">Case Number</label> <input
+							type="text" id="caseNumber" name="caseNumber"
+							class="form-control" placeholder="Enter Case Number" required>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Determine
+						Eligibility</button>
+				</form>
+			</div>
 		</div>
+
 	</section>
 </body>
 </html>

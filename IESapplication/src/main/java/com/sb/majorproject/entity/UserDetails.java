@@ -27,33 +27,28 @@ public class UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
-	
+
 	@NotBlank(message = "FullName is Required")
 	private String fullName;
-	
+
 	@Email(message = "Invalid email format")
 	@NotNull(message = "Email is Required")
 	private String email;
-	
+
 	private String password;
-	
 
 	@Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be exactly 10 digits")
 	private String mobileno;
-	
+
 	private String gender;
 	private LocalDate dob;
-	
+
 	@Pattern(regexp = "^[0-9]{12}$", message = "Aadhaar number must be exactly 12 numeric digits")
-	private String aadhaarNumber;   
+	private String aadhaarNumber;
 
 	private String AcctStatus;
 	private String ActiveStatus;
 
-	
 	private String role;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Plan> plans;
 
 }

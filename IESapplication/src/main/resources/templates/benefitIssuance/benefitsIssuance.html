@@ -11,6 +11,51 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">BenifitsInsuance</h2>
+			<div class="container mt-4">
+
+
+
+				<form th:action="@{/benefit-issuance}" method="post">
+					<div class="mb-3">
+						<label for="caseNumber" class="form-label">Case Number</label> <input
+							type="text" id="caseNumber" name="caseNumber"
+							class="form-control" placeholder="Enter Case Number" required>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+
+			<!-- Results Table -->
+			<div class="mt-4">
+				<h4>Benefit Issuance Details</h4>
+				<table class="table table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th>Case Number</th>
+							<th>Plan Name</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Benefit Amount</th>
+							<th>Beneficiary</th>
+							<th>Transaction Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="benefit : ${benefitList}">
+							<td th:text="${benefit.caseNumber}"></td>
+							<td th:text="${benefit.planName}"></td>
+							<td th:text="${benefit.startDate}"></td>
+							<td th:text="${benefit.endDate}"></td>
+							<td th:text="${benefit.benefitAmount}"></td>
+							<td th:text="${benefit.beneficiary}"></td>
+							<td th:text="${benefit.transactionDate}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
 		</div>
 	</section>
 </body>

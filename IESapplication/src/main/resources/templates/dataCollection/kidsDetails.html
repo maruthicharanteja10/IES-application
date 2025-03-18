@@ -5,13 +5,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KidsDetails</title>
+<script>
+        function addKid() {
+        	function addKid() {
+                let container = document.getElementById("kidsContainer");
+                let newKid = document.createElement("div");
+                newKid.classList.add("row", "mb-3");
 
+                // Generate a unique index to avoid conflicts
+                let index = document.querySelectorAll("#kidsContainer .row").length;
+
+                newKid.innerHTML = `
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="kidNames" placeholder="Kid Name" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" name="kidAges" placeholder="Kid Age" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="kidSSNs" placeholder="Kid SSN" required>
+                </div>
+            `;
+            container.appendChild(newKid);
+        }
+    </script>
 </head>
 <body>
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">Kids Details</h2>
+			<div class="container mt-5">
+				<button type="button" class="btn btn-primary " onclick="addKid()">Add
+					Kid</button>
+				<form action="@{/submitKidsDetails}" method="post">
+					<div class="mb-3">
+						<label for="caseNumber" class="form-label">Case Number</label> <input
+							type="text" class="form-control" id="caseNumber"
+							name="caseNumber" readonly>
+					</div>
+
+					<div id="kidsContainer">
+						<div class="row mb-3">
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="kidNames"
+									placeholder="Kid Name" required>
+							</div>
+							<div class="col-md-4">
+								<input type="number" class="form-control" name="kidAges"
+									placeholder="Kid Age" required>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="kidSSNs"
+									placeholder="Kid SSN" required>
+							</div>
+						</div>
+					</div>
+
+
+					<button type="submit" class="btn btn-success">Submit</button>
+				</form>
+			</div>
 		</div>
+
 	</section>
 </body>
 </html>
