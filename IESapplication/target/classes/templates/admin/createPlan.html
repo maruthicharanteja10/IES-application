@@ -9,8 +9,62 @@
 </head>
 <body>
 	<section style="height: 93vh;">
-		<div class="container ">
-			<h2 class="text-center">CreatePlan</h2>
+
+		<h2 class="text-center">CreatePlan</h2>
+		<div class="container mt-5">
+			<p th:text="${SuccessMsg}" class="text-success"></p>
+			<p th:text="${errMsg}" class="text-danger"></p>
+			<form th:action="@{/IES/admin/createPlans}" th:object="${plans}"
+				method="post">
+				
+				<div class="row mb-4">
+					<div class="col-md-6">
+						<label class="form-label">Plan Name</label> <input type="text"
+							class="form-control" th:field="*{planName}" required>
+					</div>
+					<div class="col-md-6">
+						<label class="form-label d-block">Category</label>
+						<div class="form-check form-check-inline mt-2">
+							<input class="form-check-input" type="radio" name="planCategory"
+								id="Food" value="Food" th:field="*{planCategory}"> <label
+								class="form-check-label" for="Food">Food</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planCategory"
+								id="UnEmployement" value="UnEmployement"
+								th:field="*{planCategory}"> <label
+								class="form-check-label" for="UnEmployement">UnEmployement</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planCategory"
+								id="Health" value="Health" th:field="*{planCategory}"> <label
+								class="form-check-label" for="Health">Health</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planCategory"
+								id="childCare" value="ChildCare" th:field="*{planCategory}">
+							<label class="form-check-label" for="ChildCare">ChildCare</label>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3 mt-4">
+
+					<div class="col-md-6">
+						<label class="form-label">Plan Start Date</label> <input
+							type="date" class="form-control" th:field="*{planStartDate}"
+							required>
+
+					</div>
+
+					<div class="col-md-6">
+						<label class="form-label">Plan End Date</label> <input type="date"
+							class="form-control" th:field="*{planEndDate}" required>
+
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
 		</div>
 	</section>
 </body>

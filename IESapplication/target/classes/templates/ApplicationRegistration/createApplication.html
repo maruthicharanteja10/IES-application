@@ -11,6 +11,64 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">CreateApplication</h2>
+			<div class="container mt-5">
+
+
+				<!-- Success & Error Messages -->
+				<p th:text="${SuccessMsg}" class="text-success"></p>
+				<p th:text="${errMsg}" class="text-danger"></p>
+
+				<form action="@{/IES/createApplication}" object="${application}"
+					method="post">
+
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Full Name</label> <input type="text"
+								class="form-control" field="*{fullName}" 
+								required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Email ID</label> <input type="email"
+								class="form-control" field="*{email}"
+								 required>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Mobile Number</label> <input type="tel"
+								class="form-control" field="*{mobileNumber}"
+								 required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label d-block">Gender</label>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" field="*{gender}"
+									value="Male" checked> <label class="form-check-label">Male</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" field="*{gender}"
+									value="Female"> <label class="form-check-label">Female</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">DOB</label> <input type="date"
+								class="form-control" field="*{dob}" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">SSN</label> <input type="text"
+								class="form-control" field="*{ssn}" 
+								required>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
 		</div>
 	</section>
 </body>

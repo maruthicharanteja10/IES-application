@@ -11,6 +11,83 @@
 	<section style="height: 93vh;">
 		<div class="container ">
 			<h2 class="text-center">Reports</h2>
+			<div class="container mt-4">
+
+
+
+				<form th:action="@{/reports}" method="get">
+					<div class="row mb-3">
+						<div class="col-md-2">
+							<label class="form-label">Plan Name</label> <select
+								class="form-select" name="planName">
+								<option value="CCAP" selected>CCAP</option>
+								<option value="Medical">Medical</option>
+								<option value="Food Assistance">Food Assistance</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label class="form-label">Plan Status</label> <select
+								class="form-select" name="planStatus">
+								<option selected>- Plan Status -</option>
+								<option value="Active">Active</option>
+								<option value="Expired">Expired</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label class="form-label">Gender</label> <select
+								class="form-select" name="gender">
+								<option selected>- Gender -</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label class="form-label">Start Date</label> <input type="date"
+								class="form-control" name="startDate">
+						</div>
+						<div class="col-md-2">
+							<label class="form-label">End Date</label> <input type="date"
+								class="form-control" name="endDate">
+						</div>
+						<div class="col-md-2 d-flex align-items-end">
+							<button type="submit" class="btn btn-primary">Search</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- Reports Table -->
+			<div class="mt-4">
+				<table class="table table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th>S.NO</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile Number</th>
+							<th>Gender</th>
+							<th>SSN</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="report, stat : ${reportList}">
+							<td th:text="${stat.index + 1}"></td>
+							<td th:text="${report.name}"></td>
+							<td th:text="${report.email}"></td>
+							<td th:text="${report.mobile}"></td>
+							<td th:text="${report.gender}"></td>
+							<td th:text="${report.ssn}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Download Buttons -->
+			<div class="mt-3">
+				<a href="/download/excel" class="btn btn-primary">Download Excel</a>
+				<a href="/download/pdf" class="btn btn-primary">Download PDF</a>
+			</div>
+		</div>
 		</div>
 	</section>
 </body>
