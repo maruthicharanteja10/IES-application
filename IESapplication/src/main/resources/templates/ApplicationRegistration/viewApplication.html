@@ -12,34 +12,40 @@
 		<div class="container ">
 			<h2 class="text-center">ViewApplication</h2>
 			<div class="container mt-5">
-
+				<h4 class="mb-5">Click on CaseNo link to Select Plan</h4>
 
 				<table id="applicationsTable"
 					class="table table-striped table-bordered">
 					<thead class="table-dark">
 						<tr>
-							<th>S.No</th>
-							<th>Case Num</th>
+							<th>SNo</th>
+							<th>Case Number</th>
 							<th>Name</th>
 							<th>Mobile Number</th>
 							<th>Gender</th>
-							<th>SSN</th>
+							<th>AadharNumber</th>
+							<th>CityName</th>
+							<th>StateName</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="app, stat : ${applications}">
-							<td th:text="${stat.index + 1}"></td>
-							<td th:text="${app.caseNum}"></td>
-							<td th:text="${app.name}"></td>
-							<td th:text="${app.mobileNumber}"></td>
+						<tr th:each="app,stat : ${applications}">
+							<td th:text="${stat.index+1}"></td>
+							<td><a
+								th:href="@{/IES/DC/planSelection(caseNo=${app.caseNo})}"
+								th:text="${app.caseNo}"></a></td>
+							<td th:text="${app.fullName}"></td>
+							<td th:text="${app.mobileno}"></td>
 							<td th:text="${app.gender}"></td>
-							<td th:text="${app.ssn}"></td>
+							<td th:text="${app.aadhaarNumber}"></td>
+							<td th:text="${app.cityName}"></td>
+							<td th:text="${app.stateName}"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		</div>
+
 	</section>
 </body>
 </html>
