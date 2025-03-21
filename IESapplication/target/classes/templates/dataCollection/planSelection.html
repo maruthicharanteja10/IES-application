@@ -12,32 +12,36 @@
 		<div class="container ">
 			<h2 class="text-center">Plan Selection</h2>
 			<div class="container mt-5">
-    
 
-        <form  action="@{/submitPlan}" object="${planSelection}" method="post">
-            <div class="mb-3">
-                <label for="caseNumber" class="form-label">Case Number</label>
-                <input type="text" class="form-control" id="caseNumber" field="*{caseNumber}" required>
-            </div>
 
-            <div class="mb-3">
-                <label for="planName" class="form-label">Plan Name</label>
-                <select class="form-select" id="planName" field="*{planName}" required>
-                    <option value="">-- Select Plan --</option>
-                    <option value="SNAP">SNAP</option>
-                    <option value="CCAP">CCAP</option>
-                    <option value="Medicaid">Medicaid</option>
-                    <option value="Medicare">Medicare</option>
-                    <option value="QHP">QHP</option>
-                    <option value="RIW">RIW</option>
-                </select>
-            </div>
+				<form th:action="@{/submitPlan}" th:object="${planSelection}"
+					method="post">
+					<div class="mb-3">
+						<label for="caseNumber" class="form-label"><h4>
+								Case Number : <span th:text="${caseno}" th:field="*{caseNo}"></span>
+							</h4> </label>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</div>
+
+					</div>
+
+					<div class="mb-3">
+						<label for="planName" class="form-label">Plan Name</label> <select
+							class="form-select" id="planName" th:field="*{planName}" required>
+							<option value="">-- Select Plan --</option>
+							<option value="SNAP">SNAP</option>
+							<option value="CCAP">CCAP</option>
+							<option value="Medicaid">Medicaid</option>
+							<option value="Medicare">Medicare</option>
+							<option value="QHP">QHP</option>
+							<option value="RIW">RIW</option>
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
 		</div>
+		
 	</section>
 </body>
 </html>
