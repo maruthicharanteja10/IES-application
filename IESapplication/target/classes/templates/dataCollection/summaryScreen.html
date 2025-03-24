@@ -8,15 +8,31 @@
 
 </head>
 <body>
-	<section style="height: 93vh;">
+	<section style="height: 160vh;">
 		<div class="container ">
 			<h2 class="text-center">Summary Screen</h2>
 			<div class="container mt-4">
-
-
-
+			<h4 class="mb-3">Plan Selection Details</h4>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead class="table-dark">
+							<tr>
+								<th>S.NO</th>
+								<th>Case Number</th>
+								<th>plan Name</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="planselection, iterStat : ${selection}">
+								<td th:text="${iterStat.index + 1}"></td>
+								<td th:text="${planselection.caseNo}"></td>
+								<td th:text="${planselection.planName}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				<h4 class="mb-3">Income Details</h4>
-
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
 						<thead class="table-dark">
@@ -29,19 +45,64 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="income, iterStat : ${incomeDetails}">
+							<tr th:each="income, iterStat : ${incomedetails}">
 								<td th:text="${iterStat.index + 1}"></td>
-								<td th:text="${income.caseNumber}"></td>
-								<td th:text="${income.monthlySalaryIncome}"></td>
+								<td th:text="${income.incomeCaseNo}"></td>
+								<td th:text="${income.salary}"></td>
 								<td th:text="${income.rentIncome}"></td>
 								<td th:text="${income.propertyIncome}"></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<h4 class="mb-3 mt-3">Education Details</h4>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead class="table-dark">
+							<tr>
+								<th>S.NO</th>
+								<th>CaseNo</th>
+								<th>HighestDegree</th>
+								<th>GraduationYear</th>
+								<th>University</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="education, iterStat : ${educationDetails}">
+								<td th:text="${iterStat.index + 1}"></td>
+								<td th:text="${education.EducationCaseNo}"></td>
+								<td th:text="${education.highestDegree}"></td>
+								<td th:text="${education.graduationYear}"></td>
+								<td th:text="${education.university}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<h4 class="mb-3 mt-3">Kids Details</h4>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead class="table-dark">
+							<tr>
+								<th>S.NO</th>
+								<th>Case Number</th>
+								<th>childName</th>
+								<th>Age</th>
+								<th>Child AdhaarNumber</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="kids, iterStat : ${kidsDetails}">
+								<td th:text="${iterStat.index + 1}"></td>
+								<td th:text="${kids.KidsCaseNo}"></td>
+								<td th:text="${kids.childName}"></td>
+								<td th:text="${kids.Age}"></td>
+								<td th:text="${kids.childAdhaarNo}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-
 	</section>
 </body>
 </html>

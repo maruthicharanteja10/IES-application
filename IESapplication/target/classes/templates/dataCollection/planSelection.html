@@ -1,3 +1,4 @@
++
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{ sidebar :: layout(~{::title} , ~{::section}) }">
@@ -13,27 +14,22 @@
 			<h2 class="text-center">Plan Selection</h2>
 			<div class="container mt-5">
 
-
-				<form th:action="@{/submitPlan}" th:object="${planSelection}"
+				<p th:text="${errMsg}" class="text-danger">
+				<form th:action="@{/IES/DC/plansSelection}" th:object="${selection}"
 					method="post">
 					<div class="mb-3">
 						<label for="caseNumber" class="form-label"><h4>
-								Case Number : <span th:text="${caseno}" th:field="*{caseNo}"></span>
-							</h4> </label>
-
-
+								Case Number : <span th:text="${caseno}"></span>
+							</h4> </label> <input type="hidden" name="caseNo" th:value="${caseno}" />
 					</div>
 
 					<div class="mb-3">
 						<label for="planName" class="form-label">Plan Name</label> <select
 							class="form-select" id="planName" th:field="*{planName}" required>
 							<option value="">-- Select Plan --</option>
-							<option value="SNAP">SNAP</option>
-							<option value="CCAP">CCAP</option>
-							<option value="Medicaid">Medicaid</option>
-							<option value="Medicare">Medicare</option>
-							<option value="QHP">QHP</option>
-							<option value="RIW">RIW</option>
+							<option th:each="plan:${plans}" th:text="${plan}"
+								th:value="${plan}"></option>
+
 						</select>
 					</div>
 
@@ -41,7 +37,7 @@
 				</form>
 			</div>
 		</div>
-		
+
 	</section>
 </body>
 </html>

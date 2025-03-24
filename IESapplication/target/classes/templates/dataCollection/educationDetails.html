@@ -14,34 +14,34 @@
 			<div class="container mt-5">
 
 
-				<form  action="@{/submitEducation}"
-					object="${educationDetails}" method="post">
+				<form th:action="@{/IES/DC/EducationDetails}"
+					th:object="${educationDetails}" method="post">
 					<div class="mb-3">
-						<label for="caseNumber" class="form-label">Case Number</label> <input
+						<input type="hidden" name="caseNo" th:value="${caseNo}" /> <label
+							for="caseNumber" class="form-label">Case Number</label> <input
 							type="text" class="form-control" id="caseNumber"
-							field="*{caseNumber}" readonly>
+							th:value="${caseNo}" readonly />
+
 					</div>
 
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="highestDegree" class="form-label">Highest
 								Degree</label> <input type="text" class="form-control"
-								id="highestDegree" field="*{highestDegree}" required>
+								id="highestDegree" th:field="*{highestDegree}" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="graduationYear" class="form-label">Graduation
-								Year</label> <select class="form-select" id="graduationYear"
-								field="*{graduationYear}" required>
-								<option th:each="year : ${#numbers.sequence(1980, 2030)}"
-									value="${year}" th:text="${year}"></option>
-							</select>
+								Year</label> <input type="number" class="form-control"
+								id="graduationYear" th:field="*{graduationYear}" required />
+
 						</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="universityName" class="form-label">University
 							Name</label> <input type="text" class="form-control" id="universityName"
-							field="*{universityName}" required>
+							th:field="*{university}" required>
 					</div>
 
 					<button type="submit" class="btn btn-primary">Submit</button>
