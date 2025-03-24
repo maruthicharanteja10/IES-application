@@ -19,6 +19,7 @@ public class IncomeDetails {
 	private Double salary;
 	private Double rentIncome;
 	private Double propertyIncome;
+	private Long incomeCaseNo;
 	@OneToOne
 	@JoinColumn(name="case_number",referencedColumnName = "caseNo",nullable =false)
 	private ApplicationDetails applicationDetails;

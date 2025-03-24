@@ -6,4 +6,6 @@ import com.sb.majorproject.entity.PlanSelection;
 
 public interface PlanSelectionRepository extends JpaRepository<PlanSelection, Integer> {
 
+	boolean existsByCaseNo(Long caseNo);
+
 }

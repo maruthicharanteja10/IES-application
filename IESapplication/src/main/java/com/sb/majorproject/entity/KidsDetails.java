@@ -1,6 +1,6 @@
 package com.sb.majorproject.entity;
 
-import java.time.LocalDate;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +19,9 @@ public class KidsDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer child_id;
 	private String childName;
-	private LocalDate dob;
+	private Integer Age;
 	private Long childAdhaarNo;
+	private Long KidsCaseNo;
 	@OneToOne
 	@JoinColumn(name="case_number",referencedColumnName = "caseNo",nullable =false)
 	private ApplicationDetails applicationDetails;

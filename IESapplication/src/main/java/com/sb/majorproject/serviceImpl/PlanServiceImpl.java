@@ -17,7 +17,7 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public boolean createSchemePlans(Plan plan) {
 		
-		plan.setActiveStatus("N");
+		plan.setActiveStatus("Y");
 		planRepository.save(plan);
 		return true;
 	}
