@@ -2,11 +2,13 @@ package com.sb.majorproject.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -38,4 +40,13 @@ public class ApplicationDetails {
 	private String cityName;
 	private String address;
 	private LocalDate createdDate;
+
+	@OneToOne(mappedBy = "applicationDetails", cascade = CascadeType.ALL)
+	private IncomeDetails incomeDetails;
+
+	@OneToOne(mappedBy = "applicationDetails", cascade = CascadeType.ALL)
+	private EducationDetails educationDetails;
+
+	@OneToOne(mappedBy = "applicationDetails", cascade = CascadeType.ALL)
+	private KidsDetails kidsDetails;
 }

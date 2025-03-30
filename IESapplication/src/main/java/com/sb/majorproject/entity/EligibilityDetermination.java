@@ -19,7 +19,7 @@ public class EligibilityDetermination {
 	private String planStatus;
 	private LocalDate eligStartDate;
 	private LocalDate eligEndDate;
-	private Double benifitAmt;
+	private String benifitAmt;
 	private String denialReason;
 	private LocalDate createdDate;
 

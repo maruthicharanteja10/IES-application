@@ -1,6 +1,8 @@
 package com.sb.majorproject.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
+
 @Data
 @Entity
 @Table(name = "dc_educationDetails")
@@ -18,12 +21,12 @@ public class EducationDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer education_id;
 	private String highestDegree;
-	@Min(1980) 
+	@Min(1980)
 	@Max(2100)
 	private Integer graduationYear;
 	private String university;
 	private Long EducationCaseNo;
-	@OneToOne
-	@JoinColumn(name = "case_number",referencedColumnName = "caseNo")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "case_number", referencedColumnName = "caseNo")
 	private ApplicationDetails applicationDetails;
 }

@@ -1,6 +1,8 @@
 package com.sb.majorproject.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +22,7 @@ public class IncomeDetails {
 	private Double rentIncome;
 	private Double propertyIncome;
 	private Long incomeCaseNo;
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="case_number",referencedColumnName = "caseNo",nullable =false)
 	private ApplicationDetails applicationDetails;
 	

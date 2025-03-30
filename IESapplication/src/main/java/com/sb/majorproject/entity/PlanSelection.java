@@ -13,7 +13,7 @@ import lombok.Data;
 public class PlanSelection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer selectionId;
+	private Long selectionId;
 	private Long caseNo;
 	private String planName;
 }
