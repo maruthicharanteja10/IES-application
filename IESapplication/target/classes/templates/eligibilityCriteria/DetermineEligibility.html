@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{ sidebar :: layout(~{::title} , ~{::section}) }">
+    th:replace="~{ sidebar :: layout(~{::title} , ~{::section}) }">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eligibility Determination</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility Determination</title>
 </head>
 <body>
-	<section style="height: 93vh;">
-		<div class="container ">
-			<h2 class="text-center">Eligibility Determination</h2>
-			<div class="container mt-4">
+    <section style="height: 93vh;">
+        <div class="container">
+            <h2 class="text-center">Eligibility Determination</h2>
+            <div class="container mt-4">
+                <form th:action="@{/IES/ED/eligibility}" method="post">
+                    <div class="mb-3">
+                        <label for="caseNumber" class="form-label">Case Number</label>
+                        <input type="text" id="caseNumber" name="caseNo" 
+                            class="form-control" th:value="${caseNo}" 
+                            placeholder="Enter Case Number" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Determine Eligibility</button>
+                </form>
+            </div>
+        </div>
 
-				<form th:action="@{/determine-eligibility}" method="post">
-					<div class="mb-3">
-						<label for="caseNumber" class="form-label">Case Number</label> <input
-							type="text" id="caseNumber" name="caseNumber"
-							class="form-control" placeholder="Enter Case Number" required>
-					</div>
-
-					<button type="submit" class="btn btn-primary">Determine
-						Eligibility</button>
-				</form>
-			</div>
-		</div>
-
-	</section>
+       
+    </section>
 </body>
 </html>

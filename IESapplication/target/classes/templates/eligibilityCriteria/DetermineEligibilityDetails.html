@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ sidebar :: layout(~{::title} , ~{::section}) }">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eligibility Determination</title>
+</head>
+<body>
+	<section style="height: 93vh;">
+		<div class="container mt-4">
+			<table id="eligibilityTable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>S.NO</th>
+						<th>Plan Name</th>
+						<th>Plan Status</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Benefit Amount</th>
+						<th>Denial Reason</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="eligibility, iterStat : ${eligibilityList}">
+						<td th:text="${iterStat.index + 1}"></td>
+						<td th:text="${eligibility.planName}"></td>
+						<td><span
+							th:class="${eligibility.planStatus == 'Approved' ? 'badge bg-success' : 'badge bg-danger'}"
+							th:text="${eligibility.planStatus}"> </span></td>
+						<td th:text="${eligibility.eligStartDate}"></td>
+						<td th:text="${eligibility.eligEndDate}"></td>
+						<td th:text="${eligibility.benifitAmt}"></td>
+						<td th:text="${eligibility.denialReason}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-primary mt-3">Generate
+					Correspondence</button>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
