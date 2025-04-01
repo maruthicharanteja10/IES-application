@@ -16,5 +16,10 @@ public class Plan {
 	private LocalDate planStartDate;
 	private LocalDate planEndDate;
 	private String activeStatus;
-	
+
+	private LocalDate createdDate;
+	private LocalDate updatedDate;
+	private String createdBy;
+	private String updatedBy;
+
 }

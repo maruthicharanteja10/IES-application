@@ -73,7 +73,8 @@
 			</li>
 
 
-			<li><a th:href="@{/IES/ED/eligibility}"> <i
+			<li th:if="${session.role == 'ADMIN'}"><a
+				th:href="@{/IES/ED/eligibility}"> <i
 					class="fa-solid fa-money-bill-1-wave"></i> <span class="link-name">Eligibility
 						Determination</span>
 			</a>
@@ -83,7 +84,7 @@
 							Determination</a></li>
 				</ul></li>
 
-			<li>
+			<li th:if="${session.role == 'ADMIN'}">
 				<div class="icon-link">
 					<a href="#"> <i class="fa-solid fa-envelope-open-text"></i> <span
 						class="link-name">Correspondence</span>
@@ -100,7 +101,8 @@
 							Notices</a></li>
 				</ul>
 			</li>
-			<li><a th:href="@{/IES/BI/benifits}"> <i
+			<li th:if="${session.role == 'ADMIN'}"><a
+				th:href="@{/IES/BI/benifits}"> <i
 					class="fa-solid fa-money-bill-1-wave"></i> <span class="link-name">Benefit
 						Issuance</span>
 			</a>
@@ -109,8 +111,28 @@
 					<li><a th:href="@{/IES/BI/benifits}" class="link-name">Benefit
 							Issuance</a></li>
 				</ul></li>
-			<li><a th:href="@{/IES/report/reports}"> <i
-					class="fa-solid fa-print"></i><span class="link-name">Reports</span>
+
+			<li th:if="${session.role == 'ADMIN'}">
+				<div class="icon-link">
+					<a th:href="@{/IES/admin/}"> <i class="fa-solid fa-user-secret"></i>
+						<span class="link-name">Admin</span>
+					</a> <i class="fas fa-caret-down arrow"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a th:href="@{/IES/admin/}" class="link-name">Admin</a></li>
+					<li><a th:href="@{/IES/admin/createAccount}">Create
+							Account</a></li>
+					<li><a th:href="@{/IES/admin/viewAccount}">view Accounts</a></li>
+					<li><a th:href="@{/IES/admin/createPlan}">Create Plan</a></li>
+					<li><a th:href="@{/IES/admin/viewPlans}">view Plans</a></li>
+
+				</ul>
+
+			</li>
+			<li th:if="${session.role == 'ADMIN'}"><a
+				th:href="@{/IES/report/reports}"> <i class="fa-solid fa-print"></i><span
+					class="link-name">Reports</span>
 			</a>
 
 				<ul class="sub-menu blank">
@@ -118,24 +140,7 @@
 				</ul></li>
 
 
-			<li>
-				<div class="icon-link">
-					<a href="#"> <i class="fa-solid fa-user-secret"></i> <span
-						class="link-name">Admin</span>
-					</a> <i class="fas fa-caret-down arrow"></i>
-				</div>
 
-				<ul class="sub-menu">
-					<li><a href="#" class="link-name">Admin</a></li>
-					<li><a th:href="@{/IES/admin/createAccount}">Create
-							Account</a></li>
-					<li><a th:href="@{/IES/admin/viewAccount}">view Accounts</a></li>
-					<li><a th:href="@{/IES/admin/createPlan}">Create Plan</a></li>
-					<li><a th:href="@{/IES/admin/viewPlans}">view Plans</a></li>
-					<li><a th:href="@{/IES/admin/}">Admin</a></li>
-				</ul>
-
-			</li>
 
 			<li>
 				<div class="profile-details">

@@ -46,6 +46,12 @@ public class UserDetails {
 	@Pattern(regexp = "^[0-9]{12}$", message = "Aadhaar number must be exactly 12 numeric digits")
 	private String aadhaarNumber;
 
+	private LocalDate createdDate;
+	private LocalDate UpdatedDate;
+
+	private String createdBy;
+	private String updatedBy;
+
 	private String AcctStatus;
 	private String ActiveStatus;
 

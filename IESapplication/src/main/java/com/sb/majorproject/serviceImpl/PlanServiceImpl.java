@@ -1,6 +1,7 @@
 package com.sb.majorproject.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ public class PlanServiceImpl implements PlanService {
 
 	@Override
 	public boolean createSchemePlans(Plan plan) {
-		
 		plan.setActiveStatus("Y");
 		planRepository.save(plan);
 		return true;
@@ -24,8 +24,27 @@ public class PlanServiceImpl implements PlanService {
 
 	@Override
 	public List<Plan> getAllPlans() {
-		
 		return planRepository.findAll();
+	}
+
+	@Override
+	public void plantoggleStatus(Integer planId) {
+		Optional<Plan> planstat = planRepository.findById(planId);
+		if (planstat.isPresent()) {
+			Plan plans = planstat.get();
+			plans.setActiveStatus(plans.getActiveStatus().equals("Y") ? "N" : "Y");
+			planRepository.save(plans);
+		}
+	}
+
+	@Override
+	public Plan editPlanByID(Integer planId) {
+		return planRepository.findById(planId).get();
+	}
+
+	@Override
+	public void updatePlans(Plan existingplan) {
+		planRepository.save(existingplan);
 	}
 
 }

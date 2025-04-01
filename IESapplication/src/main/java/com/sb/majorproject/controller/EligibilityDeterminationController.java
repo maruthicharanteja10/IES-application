@@ -25,21 +25,22 @@ public class EligibilityDeterminationController {
 	public String createApplicationpage(Model model) {
 		ApplicationDetails applicationDetails = new ApplicationDetails();
 		Long caseNo = applicationDetails.getCaseNo();
+		List<EligibilityDetermination> listEligibility = determinationService.findAllListEligibility();
+		model.addAttribute("eligibilityList", listEligibility);
 		model.addAttribute("caseNo", caseNo);
 		return "/eligibilityCriteria/DetermineEligibility";
 	}
 
-	@PostMapping("/eligibility")
+	@PostMapping("/checkeligibility")
 	public String createApplication(@RequestParam("caseNo") Long caseNo, Model model,
 			EligibilityDetermination determination) {
 		determinationService.checkEligibility(determination, caseNo);
-		return "redirect:/IES/ED/eligibility/List";
+		return "redirect:/IES/ED/eligibility";
 	}
 
 	@GetMapping("/eligibility/List")
 	public String ListEligibility(Model model) {
-		List<EligibilityDetermination> listEligibility = determinationService.findAllListEligibility();
-		model.addAttribute("eligibilityList", listEligibility);
+		
 		return "/eligibilityCriteria/DetermineEligibilityDetails";
 	}
 

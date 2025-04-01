@@ -1,6 +1,8 @@
 package com.sb.majorproject.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +25,7 @@ import com.sb.majorproject.entity.UserDetails;
 import com.sb.majorproject.service.PlanService;
 import com.sb.majorproject.service.UserDetailsService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -60,7 +64,7 @@ public class AdminController {
 		unlockForm.setEmail(email);
 		model.addAttribute("email", email);
 		model.addAttribute("unlock", unlockForm);
-		return "unlock";
+		return "/profileCreation/unlock";
 	}
 
 	@PostMapping("/unlock")
@@ -80,29 +84,35 @@ public class AdminController {
 		} else {
 			model.addAttribute("Msg", "New pswd and Confirm pswd should be same");
 		}
-		return "unlock";
+		return "/profileCreation/unlock";
 	}
 
 	@GetMapping("/login")
 	public String loginpage(Model model) {
 		model.addAttribute("form", new LoginForm());
-		return "login";
+		return "/profileCreation/login";
 	}
 
 	@PostMapping("/login")
-	public String login(Model model, @ModelAttribute("form") LoginForm form) {
+	public String login(Model model, @ModelAttribute("form") LoginForm form, HttpSession session) {
 		String status = userdetailsService.loginAccount(form.getEmail(), form.getPassword());
+
 		System.out.println(status);
-		if ("success".equals(status)) {
+		if ("adminsuccess".equals(status)) {
+			session.setAttribute("role", "ADMIN");
+			return "redirect:/IES/dashboard";
+		}
+		if ("caseWorkersuccess".equals(status)) {
+			session.setAttribute("role", "USER");
 			return "redirect:/IES/dashboard";
 		}
 		model.addAttribute("Msg", "Account is " + status);
-		return "login";
+		return "/profileCreation/login";
 	}
 
 	@GetMapping("/forgot")
 	public String forgotpswdPage() {
-		return "forgotpswd";
+		return "/profileCreation/forgotpswd";
 	}
 
 	@PostMapping("/forgotpswd")
@@ -113,7 +123,7 @@ public class AdminController {
 		} else {
 			model.addAttribute("Msg", "Invalid email");
 		}
-		return "forgotpswd";
+		return "/profileCreation/forgotpswd";
 	}
 
 	@GetMapping("/viewAccount")
@@ -123,6 +133,32 @@ public class AdminController {
 		return "/admin/viewAccount";
 	}
 
+	@GetMapping("/toggleAccountStatus/{userId}")
+	public String toggleUserStatus(@PathVariable Long userId) {
+		userdetailsService.toggleStatus(userId);
+		return "redirect:/IES/admin/viewAccount";
+	}
+
+	@GetMapping("/Edituser/{userId}")
+	public String EditUserDetails(Model model, @PathVariable("userId") Long userId) {
+		model.addAttribute("user", userdetailsService.editById(userId));
+		return "/admin/editAccount";
+	}
+
+	@PostMapping("/Edituser/{userId}")
+	public String EditUser(Model model, @PathVariable("userId") Long userId, @ModelAttribute UserDetails user) {
+		UserDetails details = userdetailsService.editById(userId);
+		details.setFullName(user.getFullName());
+		details.setGender(user.getGender());
+		details.setEmail(user.getEmail());
+		details.setAadhaarNumber(user.getAadhaarNumber());
+		details.setDob(user.getDob());
+		details.setUpdatedDate(LocalDate.now());
+		details.setUpdatedBy("tej@gmail.com");
+		userdetailsService.updateAccount(details);
+		return "redirect:/IES/admin/viewAccount";
+	}
+
 	@GetMapping("/createPlan")
 	public String createPlanspage(Model model) {
 		model.addAttribute("plans", new Plan());
@@ -130,7 +166,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/createPlans")
-	public String createPlans( @ModelAttribute("plans") Plan plan,RedirectAttributes redirectAttributes) {
+	public String createPlans(@ModelAttribute("plans") Plan plan, RedirectAttributes redirectAttributes) {
 		boolean status = planService.createSchemePlans(plan);
 		System.out.println(status);
 		if (status) {
@@ -143,9 +179,36 @@ public class AdminController {
 
 	@GetMapping("/viewPlans")
 	public String viewPlanspage(Model model) {
-	List<Plan>	viewplans=planService.getAllPlans();
-	model.addAttribute("plans",viewplans);
+		List<Plan> viewplans = planService.getAllPlans();
+		model.addAttribute("plans", viewplans);
 		return "/admin/viewPlans";
+	}
+
+	@GetMapping("/toggleplanStatus/{planId}")
+	public String toggleplanStatus(@PathVariable Integer planId) {
+		planService.plantoggleStatus(planId);
+
+		return "redirect:/IES/admin/viewPlans";
+	}
+
+	@GetMapping("/EditPlan/{planId}")
+	public String editplans(Model model, @PathVariable("planId") Integer planId) {
+		model.addAttribute("plans", planService.editPlanByID(planId));
+		return "/admin/EditPlan";
+	}
+
+	@PostMapping("/EditPlan/{planId}")
+	public String editplan(@PathVariable("planId") Integer planId, @ModelAttribute Plan plans) {
+		Plan existingplan = planService.editPlanByID(planId);
+		existingplan.setPlanName(plans.getPlanName());
+		existingplan.setPlanCategory(plans.getPlanCategory());
+		existingplan.setPlanStartDate(plans.getPlanStartDate());
+		existingplan.setPlanEndDate(plans.getPlanEndDate());
+		existingplan.setUpdatedBy("tej@gamil.com");
+		existingplan.setUpdatedDate(LocalDate.now());
+		planService.updatePlans(existingplan);
+
+		return "redirect:/IES/admin/viewPlans";
 	}
 
 	@GetMapping("/")

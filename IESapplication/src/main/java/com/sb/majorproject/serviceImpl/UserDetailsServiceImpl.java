@@ -1,6 +1,8 @@
 package com.sb.majorproject.serviceImpl;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import com.sb.majorproject.utils.PasswordUtils;
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDetailsRepository userDetailRepo;
-		
+
 	@Autowired
 	private EmailUtils emailUtils;
 
@@ -39,7 +41,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		// To generate Password
 		String tempPswd = PasswordUtils.generateRandomPswd();
 		entity.setPassword(tempPswd);
-
+		entity.setCreatedDate(LocalDate.now());
+		entity.setUpdatedDate(LocalDate.now());
+		entity.setCreatedBy("charantejdonthireddy@gmail.com");
+		entity.setUpdatedBy("charantejdonthireddy@gmail.com");
 		entity.setAcctStatus("LOCKED");
 		entity.setActiveStatus("Y");
 		entity.setRole("USER");
@@ -100,22 +105,36 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (entity.getAcctStatus().equals("LOCKED")) {
 			return "locked";
 		}
-
-//		// create session and store user data in session
-//		Session.setAttribute("userId", (Long)entity.getUserId());
-		return "success";
+		if (entity.getRole().equals("ADMIN")) {
+			return "adminsuccess";
+		} else {
+			return "caseWorkersuccess";
+		}
 	}
 
 	@Override
 	public List<UserDetails> getAllDetails() {
-		
 		return userDetailRepo.findAll();
 	}
 
-	
+	@Override
+	public void toggleStatus(Long userId) {
+		Optional<UserDetails> optionalUser = userDetailRepo.findById(userId);
+		if (optionalUser.isPresent()) {
+			UserDetails user = optionalUser.get();
+			user.setActiveStatus(user.getActiveStatus().equals("Y") ? "N" : "Y");
+			userDetailRepo.save(user);
+		}
+	}
 
+	@Override
+	public UserDetails editById(Long userId) {
+		return userDetailRepo.findById(userId).get();
+	}
 
-	
-
+	@Override
+	public void updateAccount(UserDetails details) {
+		userDetailRepo.save(details);
+	}
 
 }

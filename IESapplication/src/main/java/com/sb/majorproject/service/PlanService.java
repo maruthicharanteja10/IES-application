@@ -10,4 +10,10 @@ public interface PlanService {
 
 	List<Plan> getAllPlans();
 
+	void plantoggleStatus(Integer planId);
+
+	Plan editPlanByID(Integer planId);
+
+	void updatePlans(Plan existingplan);
+
 }

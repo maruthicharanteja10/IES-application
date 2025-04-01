@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/login_signup.css}">
+
+<title>FORGOT PASSWORD</title>
+</head>
+<body>
+
+	<main>
+
+		<section class="form">
+
+			<h1 class="form__title">Hello Welcome</h1>
+			<p class="form__description">Recover Your Password</p>
+			<p th:text="${Msg}">
+			<form th:action="@{/IES/admin/forgotpswd}" method="post">
+				<label class="form-control__label">Email</label> <input type="email"
+					name="email" class="form-control">
+
+				<button class="form__submit" id="submit">Submit</button>
+			</form>
+
+			<p class="form__footer">
+				Already have an account? <a th:href="@{/IES/admin/login}"> Login here</a>
+			</p>
+
+
+		</section>
+
+		<section class="form__animation">
+			<div id="ball">
+				<div class="ball">
+					<div id="face">
+						<div class="ball__eyes">
+							<div class="eye_wrap">
+								<span class="eye"></span>
+							</div>
+							<div class="eye_wrap">
+								<span class="eye"></span>
+							</div>
+						</div>
+						<div class="ball__mouth"></div>
+					</div>
+				</div>
+			</div>
+			<div class="ball__shadow"></div>
+		</section>
+	</main>
+	<script th:src="@{/js/login_signup.js}"></script>
+</body>
+</html>

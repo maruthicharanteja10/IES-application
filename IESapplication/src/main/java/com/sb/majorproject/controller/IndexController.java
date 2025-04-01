@@ -25,6 +25,11 @@ public class IndexController {
 		
 		return "dashboard";
 	}
+	@GetMapping("/caseWorkerdashboard")
+	public String caseWorkerdashboardpage() {
+		
+		return "dashboard";
+	}
 
 	@GetMapping("/profile")
 	public String profilepage() {
