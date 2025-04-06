@@ -1,11 +1,12 @@
 package com.sb.majorproject.controller;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -128,15 +129,28 @@ public class AdminController {
 
 	@GetMapping("/viewAccount")
 	public String viewAccountspage(Model model) {
-		List<UserDetails> details = userdetailsService.getAllDetails();
-		model.addAttribute("detail", details);
-		return "/admin/viewAccount";
+		return findPaginatedAccounts(1, model);
 	}
 
 	@GetMapping("/toggleAccountStatus/{userId}")
-	public String toggleUserStatus(@PathVariable Long userId) {
+	public String toggleUserStatus(@PathVariable("userId") Long userId) {
 		userdetailsService.toggleStatus(userId);
 		return "redirect:/IES/admin/viewAccount";
+	}
+
+	@GetMapping("accounts/page/{pageNo}")
+	public String findPaginatedAccounts(@PathVariable(value = "pageNo") int pageNo, Model model) {
+		int pageSize = 3;
+
+		Page<UserDetails> page = userdetailsService.findPaginated(pageNo, pageSize);
+		List<UserDetails> listUserDetails = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("detail", listUserDetails);
+		return "/admin/viewAccount";
 	}
 
 	@GetMapping("/Edituser/{userId}")
@@ -179,8 +193,21 @@ public class AdminController {
 
 	@GetMapping("/viewPlans")
 	public String viewPlanspage(Model model) {
-		List<Plan> viewplans = planService.getAllPlans();
-		model.addAttribute("plans", viewplans);
+		return findPaginatedplans(1, model);
+	}
+
+	@GetMapping("plans/page/{pageNo}")
+	public String findPaginatedplans(@PathVariable(value = "pageNo") int pageNo, Model model) {
+		int pageSize = 3;
+
+		Page<Plan> page = planService.findPaginated(pageNo, pageSize);
+		List<Plan> listPlans = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("plans", listPlans);
 		return "/admin/viewPlans";
 	}
 

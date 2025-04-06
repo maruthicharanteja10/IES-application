@@ -10,7 +10,47 @@
 <body>
 	<section style="height: 93vh;">
 		<div class="container ">
-			<h2 class="text-center">History Notices</h2>
+			<h2 class="text-center mb-4">History Notices</h2>
+			<form th:action="@{/search-case}" method="get" class="mb-4 mt-4">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" name="caseNumber"
+						placeholder="Enter Case Number" required>
+					<button class="btn btn-primary" type="submit">Search</button>
+				</div>
+			</form>
+
+
+			<div class="table-responsive">
+				<table id="historyTable" class="table table-bordered table-striped">
+					<thead class="table-light">
+						<tr>
+							<th>S.NO</th>
+							<th>Edg Trace ID</th>
+							<th>Plan Name</th>
+							<th>Plan Status</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Benefit Amount</th>
+							<th>Generated Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="plan, iterStat : ${plans}">
+							<td th:text="${iterStat.count}">1</td>
+							<td th:text="${plan.edgTraceId}">7567657</td>
+							<td th:text="${plan.planName}">SNAP</td>
+							<td th:text="${plan.planStatus}">Approved</td>
+							<td
+								th:text="${plan.startDate != null ? #dates.format(plan.startDate, 'dd/MM/yyyy') : 'N/A'}">20/10/2021</td>
+							<td
+								th:text="${plan.endDate != null ? #dates.format(plan.endDate, 'dd/MM/yyyy') : 'N/A'}">20/12/2022</td>
+							<td
+								th:text="${plan.benefitAmount != null ? '$' + plan.benefitAmount : 'N/A'}">$100.00</td>
+							<td th:text="${#dates.format(plan.generatedDate, 'dd-MM-yyyy')}">10-10-2021</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</section>
 </body>

@@ -6,6 +6,9 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sb.majorproject.entity.ApplicationDetails;
@@ -75,4 +78,10 @@ public class ApplicationDetailsServiceImpl implements ApplicationDetailsService 
 
         return caseNo;
     }
+
+	@Override
+	public Page<ApplicationDetails> findPaginated(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return this.applicationDetailsRepo.findAll(pageable);
+	}
 }

@@ -2,6 +2,8 @@ package com.sb.majorproject.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.sb.majorproject.entity.EligibilityDetermination;
 
 public interface EligibilityDeterminationService {
@@ -9,6 +11,12 @@ public interface EligibilityDeterminationService {
 
 	List<EligibilityDetermination> findAllListEligibility();
 
-	void checkEligibility(EligibilityDetermination determination, Long caseNo);
+	boolean checkEligibility(EligibilityDetermination determination, Long caseNo) ;
+
+	 Page<EligibilityDetermination> findPaginated(int pageNo, int pageSize) ;
+
+	
+
+	
 
 }

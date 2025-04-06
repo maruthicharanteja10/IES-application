@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sb.majorproject.entity.ApplicationDetails;
@@ -39,11 +42,11 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 	private IncomeDetailsRepository incomeDetailsRepository;
 
 	@Override
-	public void checkEligibility(EligibilityDetermination determination, Long caseNo) {
+	public boolean checkEligibility(EligibilityDetermination determination, Long caseNo) {
 		// Check if eligibility determination already exists
 		if (determinationRepository.existsByCaseNo(caseNo)) {
-			System.out.println("Eligibility determination already exists for caseNo: " + caseNo);
-			return;
+			return false;
+
 		}
 
 		// Fetch all necessary details based on caseNo
@@ -60,7 +63,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 			determination.setCaseNo(caseNo);
 			determination.setCreatedDate(LocalDate.now());
 			determinationRepository.save(determination);
-			return;
+
 		}
 
 		// Extracting data
@@ -88,7 +91,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("$200");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for SNAP");
+				determination.setDenialReason("Age is Lessthan 18 And You have Income ");
 			}
 			break;
 
@@ -98,7 +101,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("$250");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for CCAP");
+				determination.setDenialReason("Have No Child (or) Have More Income");
 			}
 			break;
 
@@ -108,7 +111,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("$350");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for Medicaid");
+				determination.setDenialReason("Having Resources (or) Have More Income");
 			}
 			break;
 
@@ -118,7 +121,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("$600");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for Medicare");
+				determination.setDenialReason("Your age is less than 60");
 			}
 			break;
 
@@ -128,7 +131,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("Purchase this plan to get $500 benefit");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for QHP");
+				determination.setDenialReason("You Should Purchase the Plan ");
 			}
 			break;
 
@@ -138,7 +141,7 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 				determination.setBenifitAmt("$450");
 			} else {
 				determination.setPlanStatus("Denied");
-				determination.setDenialReason("Not eligible for RIW");
+				determination.setDenialReason("You should have atleast Btech Degree and Have NoIncome");
 			}
 			break;
 
@@ -156,11 +159,18 @@ public class EligibilityDeterminationServiceImpl implements EligibilityDetermina
 
 		// Save eligibility determination
 		determinationRepository.save(determination);
-
+		return true;
 	}
 
 	@Override
 	public List<EligibilityDetermination> findAllListEligibility() {
 		return determinationRepository.findAll();
 	}
+
+	@Override
+	public Page<EligibilityDetermination> findPaginated(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return this.determinationRepository.findAll(pageable);
+	}
+
 }

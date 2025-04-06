@@ -3,6 +3,8 @@ package com.sb.majorproject.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+
 import com.sb.majorproject.binding.RegisterDetails;
 import com.sb.majorproject.binding.UnlockForm;
 
@@ -25,5 +27,7 @@ public interface UserDetailsService {
 	UserDetails editById(Long userId);
 
 	void updateAccount(UserDetails details);
+
+	Page<UserDetails> findPaginated(int pageNo, int pageSize);
 
 }

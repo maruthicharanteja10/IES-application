@@ -43,6 +43,33 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="d-flex justify-content-between">
+					<p>
+						Showing <span th:text="${(currentPage )}"></span> to <span
+							th:text="${(currentPage) > totalItems ?  currentPage: (totalPages)}"></span>
+						of <span th:text="${totalPages}"></span> entries
+					</p>
+
+					<nav>
+						<ul class="pagination">
+							<li class="page-item"
+								th:classappend="${currentPage == 1} ? 'disabled'"><a
+								class="page-link" th:href="@{(${currentPage} - 1)}">Previous</a>
+							</li>
+
+							<li class="page-item"
+								th:each="i : ${#numbers.sequence(1, totalPages)}"
+								th:classappend="${i == currentPage} ? 'active'"><a
+								class="page-link" th:href="@{'/IES/AR/Applications/page/' + ${i}}"
+								th:text="${i}">1</a></li>
+
+							<li class="page-item"
+								th:classappend="${currentPage == totalPages} ? 'disabled'">
+								<a class="page-link" th:href="@{(${currentPage} + 1)}">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
 

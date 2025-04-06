@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sb.majorproject.binding.RegisterDetails;
@@ -105,6 +108,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (entity.getAcctStatus().equals("LOCKED")) {
 			return "locked";
 		}
+		if (entity.getActiveStatus().equals("N")) {
+			return "deactivated, Go to Office to Activate It";
+		}
 		if (entity.getRole().equals("ADMIN")) {
 			return "adminsuccess";
 		} else {
@@ -135,6 +141,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public void updateAccount(UserDetails details) {
 		userDetailRepo.save(details);
+	}
+
+	@Override
+	public Page<UserDetails> findPaginated(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return this.userDetailRepo.findAll(pageable);
 	}
 
 }
