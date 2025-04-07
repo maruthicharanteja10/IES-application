@@ -1,4 +1,4 @@
-package com.sb.majorproject.entity;
+package com.sb.majorproject.binding;
 
 import java.time.LocalDate;
 
@@ -11,16 +11,12 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
-@Entity(name = "ies_corrNotices")
-public class CorrespondanceNotices {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer notice_id;
+public class PendingNotices {
 	private Long caseNo;
 	private Integer ed_trace_id;
 	private String planName;
 	private String planStatus;
+	
 	private LocalDate eligStartDate;
 	private LocalDate eligEndDate;
 	private String benifitAmt;

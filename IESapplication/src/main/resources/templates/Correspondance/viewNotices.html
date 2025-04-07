@@ -37,12 +37,10 @@
 								<td th:text="${correspondances.eligStartDate}">20/10/2021</td>
 								<td th:text="${correspondances.eligEndDate}">20/12/2022</td>
 								<td th:text="${correspondances.benifitAmt}">$100.00</td>
-								<td>
-									<a href="" class="btn btn-primary">
-										<i class="bi bi-printer"></i>
-										<!-- Bootstrap Icons -->
-									</a>
-								</td>
+								<td><a
+									th:href="@{/IES/correspondance/toggleNoticeStatus/{notice_id}(notice_id=${correspondances.notice_id})}"
+									class="btn btn-primary"> <i class="bi bi-printer"></i> <!-- Bootstrap Icons -->
+								</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -65,7 +63,8 @@
 							<li class="page-item"
 								th:each="i : ${#numbers.sequence(1, totalPages)}"
 								th:classappend="${i == currentPage} ? 'active'"><a
-								class="page-link" th:href="@{'/IES/correspondance/cn/page/' + ${i}}"
+								class="page-link"
+								th:href="@{'/IES/correspondance/cn/page/' + ${i}}"
 								th:text="${i}">1</a></li>
 
 							<li class="page-item"
